@@ -1,0 +1,95 @@
+<!--AKSHAR PATEL-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #txt{
+            width: 737px;
+            height: 50px;
+            font-size: 25px;
+        }
+        .imgsize{
+            width: 737px;
+            height: 50px;
+            font-size: 25px;
+        }
+        #dd{
+            color: white;
+            background-color: black;
+            padding-top: 10px;
+            height: 75px;
+        }
+        @media screen and (min-width: 601px) {
+            .btn-My{
+            width: 39%;
+            height: 50px;
+            font-size: 25px;
+        }
+        }
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+        @media screen and (max-width: 600px) {
+            .btn-My{
+            width: 39%;
+            height: 50px;
+            font-size: 15px;
+        }
+        }
+    
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="includedContent"></div><br>
+    <center>
+    <div id="dd">
+    <h1>Compress Image</h1></div><br>
+    <form enctype="multipart/form-data" method="post" action="show.py">
+    
+        <input id="fileInput" class="imgsize" type="file" name="filename" onchange="AlertFilesize()"  placeholder="image"><br>
+        <img id="output"  width="400" height="400" style="visibility: hidden;"><br>
+        <p id="img_name"></p>
+        <p id="display"></p>
+        
+        <div id="qualiy_sld" style="visibility: hidden">
+            <b>How many Percentage you want to decrease quality of image</b><br>
+            <input type="number" id="btn-My" name="quality" min="20" max="100" value="80"><br><br>
+        </div>
+        <input id="btnsubmit" class="btn-My" type="submit" name="sub" value="compress the image" style="visibility: hidden" >
+        
+<script type="text/javascript">
+    function AlertFilesize(){
+        if(window.ActiveXObject){
+            var fso = new ActiveXObject("Scripting.FileSystemObject");
+            var filepath = document.getElementById('fileInput').value;
+            var thefile = fso.getFile(filepath);
+            var sizeinbytes = thefile.size;
+        }else{
+            var sizeinbytes = document.getElementById('fileInput').files[0].size;
+        }
+
+        var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
+        fSize = sizeinbytes; i=0;while(fSize>900){fSize/=1024;i++;}
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        var imgname=event.target.files[0].name;
+        var size=(Math.round(fSize*100)/100)+' '+fSExt[i];
+        // document.write(size)
+        document.getElementById('display').innerHTML="Size of file:"+size;
+        document.getElementById('img_name').innerHTML="Image Name:"+imgname;
+        document.getElementById('qualiy_sld').style.visibility="visible";
+        document.getElementById('output').style.visibility="visible";
+        document.getElementById('btnsubmit').style.visibility="visible";
+        var name=document.getElementById("output");
+    
+    }
+</script>
+            
+    </form>
+</center>
+</body>
+</html>
